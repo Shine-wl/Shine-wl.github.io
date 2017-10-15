@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>cookie和session | 本人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="javascript操作cookie的方法cookie存储数据限制 cookie的存储数据量限制：4kByte 4096个英文字符 cookie分类  会话cookie，数据存储在内存，浏览器关闭后就消失了 持久cookie，数据存储在浏览器指定的文件中，过期之后消失">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookie和session">
+<meta property="og:url" content="http://yoursite.com/2017/09/20/cookie和sesson/index.html">
+<meta property="og:site_name" content="本人博客">
+<meta property="og:description" content="javascript操作cookie的方法cookie存储数据限制 cookie的存储数据量限制：4kByte 4096个英文字符 cookie分类  会话cookie，数据存储在内存，浏览器关闭后就消失了 持久cookie，数据存储在浏览器指定的文件中，过期之后消失">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-20T07:10:04.143Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cookie和session">
+<meta name="twitter:description" content="javascript操作cookie的方法cookie存储数据限制 cookie的存储数据量限制：4kByte 4096个英文字符 cookie分类  会话cookie，数据存储在内存，浏览器关闭后就消失了 持久cookie，数据存储在浏览器指定的文件中，过期之后消失">
+    
+
+    
+        <link rel="alternate" href="/" title="本人博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">本人博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">档案</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/1.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">档案</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/1.jpg" />
+            <h2 id="name">shine-wl</h2>
+            <h3 id="title">初出茅庐</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>天津, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/Shine-wl">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                15
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://shine-wl.github.io/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-cookie和sesson" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            cookie和session
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/09/20/cookie和sesson/">
+            <time datetime="2017-09-20T07:01:09.915Z" itemprop="datePublished">2017-09-20</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="javascript操作cookie的方法"><a href="#javascript操作cookie的方法" class="headerlink" title="javascript操作cookie的方法"></a>javascript操作cookie的方法</h2><p><strong>cookie存储数据限制</strong></p>
+<p>cookie的存储数据量限制：4kByte 4096个英文字符</p>
+<p><strong>cookie分类</strong></p>
+<ul>
+<li>会话cookie，数据存储在内存，浏览器关闭后就消失了</li>
+<li>持久cookie，数据存储在浏览器指定的文件中，过期之后消失</li>
+</ul>
+<a id="more"></a>
+<p><strong>设置cookie</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie=&apos;hello=nihao&apos;;</div></pre></td></tr></table></figure>
+<p><strong>获取cookie</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie; //获取的是字符串格式  &quot;hello=nihao&quot;</div></pre></td></tr></table></figure>
+<p><strong>cookie 常用属性</strong></p>
+<p>注意：设置属性是之间的<code>；</code> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">expires 表示有效期</div><div class="line">path 表示路径 (在父路径下设置的cookie，子路径可以获取到，反之不可以)</div><div class="line"></div><div class="line">document.cookie=&apos;hello=hi; path=/; expires=时间&apos;</div></pre></td></tr></table></figure>
+<p><strong>封装获取指定cookie的方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//传递的参数，要获取的cookie</div><div class="line">function getCookie(key)&#123;</div><div class="line">	//获取所有的cookie</div><div class="line">    var all = document.cookie;</div><div class="line">    var result = null;</div><div class="line">    //判断cookie是否存在</div><div class="line">    if(all)&#123;</div><div class="line">      var kvs = all.split(&apos;; &apos;);</div><div class="line">      kvs.forEach(function(item)&#123;</div><div class="line">        var kv = item.split(&apos;=&apos;);</div><div class="line">        if(key == kv[0])&#123;</div><div class="line">          // 找到了对应的cookie</div><div class="line">          result = kv[1];</div><div class="line">          return false;// 终止forEach循环</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    return result;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><strong>封装设置cookie的方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//获取时间</div><div class="line">var date = new Date();</div><div class="line">//设置时间</div><div class="line">date.setDate(date.getDate() + 3);</div><div class="line"></div><div class="line">function setCookie(key,value,options)&#123;</div><div class="line">	//参数1 ：cookie名字</div><div class="line">	//参数2 ：cookie值</div><div class="line">   //参数3 ：属性</div><div class="line">   var cookie = key + &apos;=&apos; + value;</div><div class="line">   for(var key in options)&#123;</div><div class="line">     //遍历options拼接属性</div><div class="line">     cookie += &apos;; &apos; + key + &apos;=&apos; + options[key];</div><div class="line">   &#125;</div><div class="line">   //设置cookie</div><div class="line">   document.cookie = cookie;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> setCookie(&apos;hello&apos;,&apos;nihao&apos;,&#123;</div><div class="line">   expires : date.toGMTString(),//时间必须转换成这种格式才能设置cookie有效期</div><div class="line">   path : &apos;/&apos;</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
+<h2 id="jquery操作cookie的方法"><a href="#jquery操作cookie的方法" class="headerlink" title="jquery操作cookie的方法"></a>jquery操作cookie的方法</h2><p>必做的一步引入文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//引入jquery文件</div><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.js&quot;&gt;&lt;/script&gt;</div><div class="line">//引入cookie文件依赖jquery</div><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;jquery.cookie.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p><strong>设置cookie</strong></p>
+<p>注（路径问题）：在默认情况下，只有设置 cookie的网页才能读取该 cookie。如果想让一个页面读取另一个页面设 置的cookie，必须设置cookie的路径。cookie的路径用于设置能够读取 cookie的顶级目录。将这个路径设置为网站的根目录，可以让所有网页都能互相读取 cookie （一般不要这样设置，防止出现冲突） </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$.cookie(&apos;hello&apos;, &apos;nihao&apos;);</div><div class="line">$.cookie(&apos;hello&apos;, &apos;nihao&apos;,&#123;expires : 3,path : &apos;/&apos;&#125;);</div></pre></td></tr></table></figure>
+<p><strong>获取cookie</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.cookie(&apos;hello&apos;); //等价于下面的 </div><div class="line">$.cookie().hello; //获取指定的cookie</div><div class="line">$.cookie();  //获取所有的cookie是对象方式  &#123;hello: &quot;nihao&quot;&#125;</div></pre></td></tr></table></figure>
+<p><strong>删除cookie</strong></p>
+<p>注：删除cookie实际上就是重新设置了cookie的有效期时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$.removeCookie(&apos;hello&apos;);</div></pre></td></tr></table></figure>
+<h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><p><strong>在php中语法</strong></p>
+<p>关于session（一般用户登录成功后会开启session、退出时会注销session）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 开启session</div><div class="line">session_start();</div></pre></td></tr></table></figure>
+<p>session开启之后会生成一个sessionid，然后以响应头的形式返回给浏览器，后续浏览器所有的请求都会以请求头的方式携带该sessionid</p>
+<p><strong>后台模拟数据：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;php?</div><div class="line"> // 开启session</div><div class="line"> $uname = $_GET[&apos;uname&apos;];</div><div class="line"> $pw = $_GET[&apos;pw&apos;];</div><div class="line"></div><div class="line"> if($uname == &apos;admin&apos; &amp;&amp; $pw == &apos;123&apos;)&#123;</div><div class="line">   // 登录成功开启session</div><div class="line">   session_start();</div><div class="line">//$_SESSION数组的使用类似于普通数组。不同的是。当页面结束后，$_SESSION的内容会被PHP解析器自动保存下来，同时在用户的浏览器留下一个cookie。下次用户访问时，使用该cookie继续会话。</div><div class="line"></div><div class="line">//存储session值，存储用户名</div><div class="line">   $_SESSION[&apos;uname&apos;] = $uname;</div><div class="line">   </div><div class="line">   $num = $_SESSION[&apos;num&apos;];</div><div class="line">   if($num)&#123;</div><div class="line">     $_SESSION[&apos;num&apos;] = $_SESSION[&apos;num&apos;] + 1;</div><div class="line">   &#125;else&#123;</div><div class="line">     $_SESSION[&apos;num&apos;] = 1;</div><div class="line">   &#125;</div><div class="line"></div><div class="line"> &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<h2 id="session与cookie的关系"><a href="#session与cookie的关系" class="headerlink" title="session与cookie的关系"></a>session与cookie的关系</h2><p>session与cookie的关系：session可以依赖于cookie，也可以不依赖cookie（URL重写-把sessionid以参数的形式添加得到URL中）</p>
+<blockquote>
+<p>具体解释：</p>
+</blockquote>
+<p> 当程序需要为某个客户端的请求创建一个session时，服务器首先检查这个客户端的请求里是否已包含了一个session标识（称为session id），</p>
+<p>如果已包含则说明以前已经为此客户端创建过session，服务器就按照session id把这个session检索出来使用（检索不到，会新建一个），如果</p>
+<p>客户端请求不包含session id，则为此客户端创建一个session并且生成一个与此session相关联的session id，session id的值应该是一个既不会</p>
+<p>重复，又不容易被找到规律以仿造的字符串，这个session id将被在本次响应中返回给客户端保存。保存这个session id的方式可以采cookie这</p>
+<p>样在交互过程中浏览器可以自动的按照规则把这个标识发送给服务器。一般这个cookie的名字都是类似于SEEESIONID。但cookie可以被人为的</p>
+<p>禁止，则必须有其他机制以便在cookie被禁止时仍然能够把session id传递回服务器及URL重写-把session id以参数的形式添加得到URL中。</p>
+<h2 id="session和cookie实现登录退出"><a href="#session和cookie实现登录退出" class="headerlink" title="session和cookie实现登录退出"></a>session和cookie实现登录退出</h2><p>后台代码登录时会生成一个session id保存在cookie中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实现登录功能</span></div><div class="line">$(<span class="string">'#loginBtn'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       $.ajax(&#123;</div><div class="line">           type: <span class="string">'post'</span>,</div><div class="line">           url: <span class="string">'/api/login'</span>,</div><div class="line">           data: $(<span class="string">'#loginForm'</span>).serialize(),</div><div class="line">           dataType: <span class="string">'json'</span>,</div><div class="line">           success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">               <span class="keyword">if</span> (data.code == <span class="number">200</span>) &#123;</div><div class="line">                   location.href = <span class="string">'/main/index'</span>;</div><div class="line">                   <span class="comment">//登录成功把个人信息传递给cookie并且命名为loginInfo</span></div><div class="line">                   $.cookie(<span class="string">'loginInfo'</span>, <span class="built_in">JSON</span>.stringify(data.result), &#123; <span class="attr">path</span>: <span class="string">'/'</span> &#125;);</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;)</div><div class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">   &#125;)</div><div class="line"></div><div class="line"><span class="comment">//渲染个人信息</span></div><div class="line">   <span class="comment">//必须引用jquery-cookie.js</span></div><div class="line">   <span class="comment">//把缓存数据转化为对象</span></div><div class="line"><span class="comment">//缓存的数据包含个人信息</span></div><div class="line">   <span class="keyword">var</span> loginInfo = $.cookie(<span class="string">'loginInfo'</span>);</div><div class="line">   loginInfo = loginInfo &amp;&amp; <span class="built_in">JSON</span>.parse(loginInfo);</div><div class="line"><span class="comment">//通过artTemplate.js把信息渲染到页面</span></div><div class="line">   <span class="keyword">var</span> tpl = <span class="string">'&lt;div class="avatar img-circle"&gt;&lt;img src="&#123;&#123;tc_avatar&#125;&#125;"&gt;&lt;/div&gt;&lt;h4&gt;&#123;&#123;tc_name&#125;&#125;&lt;/h4&gt;'</span>;</div><div class="line">   <span class="keyword">var</span> html = template.render(tpl, loginInfo);</div><div class="line">   $(<span class="string">'.aside .profile'</span>).html(html);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//退出</span></div><div class="line">   $(<span class="string">'#logoutBtn'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       $.ajax(&#123;</div><div class="line">           type: <span class="string">'post'</span>,</div><div class="line">           url: <span class="string">'/api/logout'</span>,</div><div class="line">           dataType: <span class="string">'json'</span>,</div><div class="line">           success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">               <span class="keyword">if</span> (data.code == <span class="number">200</span>) &#123;</div><div class="line">                   location.href = <span class="string">'/main/login'</span>;</div><div class="line">                   $.removeCookie(<span class="string">'PHPSESSID'</span>); <span class="comment">//退出时移除cookie中的PHPSESSID(session id)</span></div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;)</div><div class="line">   &#125;);</div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/09/20/cookie和sesson/" data-id="cj8sbgnz3000j6gqov589nerj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/09/20/cookie和sesson/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2017/09/20/cookie和sesson/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/09/20/Git使用/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    git 基本使用
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/09/20/require.js的使用方法和sea.js/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Javascript模块化编程require.js的用法和sea.js</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/10/15/豆瓣电影/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/10/15/豆瓣电影/" class="title">豆瓣电影</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T05:32:17.831Z" itemprop="datePublished">2017-10-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/Git使用/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/Git使用/" class="title">git 基本使用</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.916Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/cookie和sesson/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/cookie和sesson/" class="title">cookie和session</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.915Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/require.js的使用方法和sea.js/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/require.js的使用方法和sea.js/" class="title">Javascript模块化编程require.js的用法和sea.js</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.913Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/07/选择器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/07/选择器/" class="title">CSS选择器</a></p>
+                            <p class="item-date"><time datetime="2017-09-07T12:53:31.550Z" itemprop="datePublished">2017-09-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/">function</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require，sea/">require，sea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/bind/" style="font-size: 10px;">bind</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/function/" style="font-size: 10px;">function</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/require，sea/" style="font-size: 10px;">require，sea</a> <a href="/tags/string/" style="font-size: 10px;">string</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/递归/" style="font-size: 15px;">递归</a> <a href="/tags/闭包/" style="font-size: 15px;">闭包</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 John Doe<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2017/09/20/cookie和sesson/';
+        
+        this.page.identifier = 'cookie和sesson';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

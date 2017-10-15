@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>call方法和apply方法以及bind方法 | 本人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="call方法 和  apply方法 以及 bind方法call方法和apply方法 函数的call方法可以实现改变this指向 然后调用该函数  123456789101112131415function fn()&amp;#123;   //当fn.call时 则内部的this=fn.call方法   console.log(this)   &amp;#125;var obj = &amp;#123;    foo:&amp;">
+<meta name="keywords" content="call,apply,bind">
+<meta property="og:type" content="article">
+<meta property="og:title" content="call方法和apply方法以及bind方法">
+<meta property="og:url" content="http://yoursite.com/2017/03/22/call方法-和-apply方法-以及-bind方法/index.html">
+<meta property="og:site_name" content="本人博客">
+<meta property="og:description" content="call方法 和  apply方法 以及 bind方法call方法和apply方法 函数的call方法可以实现改变this指向 然后调用该函数  123456789101112131415function fn()&amp;#123;   //当fn.call时 则内部的this=fn.call方法   console.log(this)   &amp;#125;var obj = &amp;#123;    foo:&amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-28T03:04:26.955Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="call方法和apply方法以及bind方法">
+<meta name="twitter:description" content="call方法 和  apply方法 以及 bind方法call方法和apply方法 函数的call方法可以实现改变this指向 然后调用该函数  123456789101112131415function fn()&amp;#123;   //当fn.call时 则内部的this=fn.call方法   console.log(this)   &amp;#125;var obj = &amp;#123;    foo:&amp;">
+    
+
+    
+        <link rel="alternate" href="/" title="本人博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">本人博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">档案</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/1.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">档案</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/1.jpg" />
+            <h2 id="name">shine-wl</h2>
+            <h3 id="title">初出茅庐</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>天津, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/Shine-wl">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                15
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://shine-wl.github.io/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-call方法-和-apply方法-以及-bind方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            call方法和apply方法以及bind方法
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/03/22/call方法-和-apply方法-以及-bind方法/">
+            <time datetime="2017-03-22T03:17:16.000Z" itemprop="datePublished">2017-03-22</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/apply/">apply</a>, <a class="tag-link" href="/tags/bind/">bind</a>, <a class="tag-link" href="/tags/call/">call</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="call方法-和-apply方法-以及-bind方法"><a href="#call方法-和-apply方法-以及-bind方法" class="headerlink" title="call方法 和  apply方法 以及 bind方法"></a>call方法 和  apply方法 以及 bind方法</h3><h4 id="call方法和apply方法"><a href="#call方法和apply方法" class="headerlink" title="call方法和apply方法"></a>call方法和apply方法</h4><ul>
+<li>函数的call方法可以实现改变this指向 然后调用该函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function fn()&#123;</div><div class="line">   //当fn.call时 则内部的this=fn.call方法</div><div class="line">   console.log(this)   </div><div class="line">&#125;</div><div class="line">var obj = &#123;</div><div class="line">    foo:&apos;bar&apos;</div><div class="line">&#125;</div><div class="line">fn.call(this) //fn</div><div class="line">fn.call(obj) //函数借用 obj</div><div class="line"></div><div class="line">function Person()&#123;</div><div class="line">    fn.call(this) //相当于把fn中的函数借用过来</div><div class="line">&#125;</div><div class="line">Person() //window</div><div class="line">new Person // 实例对象</div></pre></td></tr></table></figure>
+<ul>
+<li>相同点： </li>
+</ul>
+<ol>
+<li>apply 和 call 的作用一样</li>
+<li>第一个参数也是用来指定内部的 this 指向的</li>
+<li>fn.apply(this)和fn.call(this)</li>
+<li>call 和 apply 的返回值就是被调用函数的返回值</li>
+</ol>
+<ul>
+<li><p>不同点：apply 和 call 的区别就在于传参的方式不一样</p>
+<ul>
+<li>call方法<ol>
+<li>可以传多个参数</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2. 指定为方法传递参数，他们对应方法的参数一一对应传递过去</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   function fn (a, b, c) &#123;</div><div class="line">      console.log(this, a, b, c)</div><div class="line">    &#125;</div><div class="line">    var ret = fn.call(this, 1,2,3,4)</div><div class="line">//结果： window   1 2 3  undefined</div></pre></td></tr></table></figure>
+<ul>
+<li><p>apply方法</p>
+<ol>
+<li>apply 必须传数组<ol>
+<li>apply 会把参数数组给展开，然后一一对应的传递给 fn 方法</li>
+<li>apply 只处理第一个参数参数，其它的不处理</li>
+</ol>
+</li>
+</ol>
+<p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  function fn (a, b, c) &#123;</div><div class="line">  console.log(this, a, b, c)</div><div class="line">&#125;</div><div class="line">var ret = fn.apply(this, [1, 2, 3], [4, 5, 6])</div><div class="line">//结果： window   1 2 3</div></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<p>​</p>
+<p> call方法应用例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```javascript</div><div class="line"> &lt;script&gt;</div><div class="line">    var animals = [</div><div class="line">      &#123; species: &apos;Lion&apos;, name: &apos;King&apos; &#125;,</div><div class="line">      &#123; species: &apos;Whale&apos;, name: &apos;Fail&apos; &#125;</div><div class="line">    ];</div><div class="line"></div><div class="line">    var handle = function (i) &#123;</div><div class="line">      // this = animals[i]</div><div class="line">      this.print = function () &#123;</div><div class="line">        console.log(&apos;#&apos; + i + &apos; &apos; + this.species + &apos;: &apos; + this.name);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for (var i = 0; i &lt; animals.length; i++) &#123;</div><div class="line">      ;(function (i) &#123;</div><div class="line">        this.print = function () &#123;</div><div class="line">          console.log(&apos;#&apos; + i + &apos; &apos; + this.species + &apos;: &apos; + this.name);</div><div class="line">        &#125;</div><div class="line">      &#125;).call(animals[i], i)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    console.log(i)</div><div class="line">  &lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="bind方法"><a href="#bind方法" class="headerlink" title="bind方法"></a>bind方法</h4><ul>
+<li>bind方法也是用来改变函数内部this指向的，但是他不调用，二食返回一个指定了this环境的新函数；</li>
+<li>注意：这个方法只是指定this的指向，但是不会执行，只是返回一个指定this指向的新函数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="keyword">var</span> obj = &#123;</div><div class="line">        name: <span class="string">'haha'</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> user = &#123;</div><div class="line">      sayName: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span></div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(that.name)</div><div class="line">        &#125;, <span class="number">1000</span>)</div><div class="line">        <span class="comment">// 等价于上面的方法，指定this的指向</span></div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">        &#125;.bind(<span class="keyword">this</span>), <span class="number">1000</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    user.sayName() <span class="comment">//张三</span></div></pre></td></tr></table></figure>
+<ul>
+<li>javascript中的传参方式是先求值之后在进行传参</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  var handle = function () &#123;</div><div class="line">          console.log(this)</div><div class="line">        &#125;</div><div class="line"> var newHandle = handle.bind(obj)</div><div class="line">// JavaScript 是求值之后才传递参数</div><div class="line"> setTimeout(newHandle, 1000)</div></pre></td></tr></table></figure>
+<ul>
+<li>bind的参数的问题</li>
+</ul>
+<ol>
+<li>bind 可以传参，但是不调用</li>
+<li>得到bing之后的新函数也可以进行传参</li>
+<li>当你在调用通过 bind 得到的新函数的时候，际上会把你在 bind ,的时候传递的参数和你调用新函数传递的参数进行合并，然后作为函数的参数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    var obj = &#123;</div><div class="line">      foo: &apos;bar&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function fn(x, y, z) &#123;</div><div class="line">      console.log(this, x, y, z)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var newFn = fn.bind(obj, 1)</div><div class="line"></div><div class="line">    newFn(4, 5) // Object&#123;foo:&apos;bar&apos;&#125; 1 4 5</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>参数是以bind的时候传的参数为准 如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    var obj = &#123;</div><div class="line">      foo: &apos;bar&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function fn(x, y, z) &#123;</div><div class="line">      console.log(this, x, y, z)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var newFn = fn.bind(obj, 1,2,3)</div><div class="line"></div><div class="line">    newFn(4, 5) // Object&#123;foo:&apos;bar&apos;&#125; 1 2 3</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>读取参数的方式按顺序读取</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    var obj = &#123;</div><div class="line">      foo: &apos;bar&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function fn(x, y, z) &#123;</div><div class="line">      console.log(this, x, y, z)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var newFn = fn.bind(obj, 1,2)</div><div class="line"></div><div class="line">    newFn(4, 5) // Object&#123;foo:&apos;bar&apos;&#125; 1 2 4</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>### </p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/03/22/call方法-和-apply方法-以及-bind方法/" data-id="cj8sbgnyc000d6gqo6suvdl11" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/03/22/call方法-和-apply方法-以及-bind方法/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2017/03/22/call方法-和-apply方法-以及-bind方法/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/03/25/JQuery中ajax同源和跨域请求原理及封装/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    JQuery中ajax同源和跨域请求原理及封装
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/03/18/yxl/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">原型链问题</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/10/15/豆瓣电影/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/10/15/豆瓣电影/" class="title">豆瓣电影</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T05:32:17.831Z" itemprop="datePublished">2017-10-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/Git使用/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/Git使用/" class="title">git 基本使用</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.916Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/cookie和sesson/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/cookie和sesson/" class="title">cookie和session</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.915Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/require.js的使用方法和sea.js/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/require.js的使用方法和sea.js/" class="title">Javascript模块化编程require.js的用法和sea.js</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.913Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/07/选择器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/07/选择器/" class="title">CSS选择器</a></p>
+                            <p class="item-date"><time datetime="2017-09-07T12:53:31.550Z" itemprop="datePublished">2017-09-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/">function</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require，sea/">require，sea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/bind/" style="font-size: 10px;">bind</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/function/" style="font-size: 10px;">function</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/require，sea/" style="font-size: 10px;">require，sea</a> <a href="/tags/string/" style="font-size: 10px;">string</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/递归/" style="font-size: 15px;">递归</a> <a href="/tags/闭包/" style="font-size: 15px;">闭包</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 John Doe<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2017/03/22/call方法-和-apply方法-以及-bind方法/';
+        
+        this.page.identifier = 'call方法-和-apply方法-以及-bind方法';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

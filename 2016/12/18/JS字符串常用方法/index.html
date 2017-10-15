@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>JS字符串的常用方法 | 本人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="chatAt()1str.charAt(n) 返回字符串的第 n 个字符，如果不在 0~str.length-1之间，则返回一个空字符串。 123var str = &quot;javascript&quot;;str.charAt(2); //&apos;v&apos;str.charAt(12); //&apos;&apos;">
+<meta name="keywords" content="javascript,string">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS字符串的常用方法">
+<meta property="og:url" content="http://yoursite.com/2016/12/18/JS字符串常用方法/index.html">
+<meta property="og:site_name" content="本人博客">
+<meta property="og:description" content="chatAt()1str.charAt(n) 返回字符串的第 n 个字符，如果不在 0~str.length-1之间，则返回一个空字符串。 123var str = &quot;javascript&quot;;str.charAt(2); //&apos;v&apos;str.charAt(12); //&apos;&apos;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-09T09:56:33.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS字符串的常用方法">
+<meta name="twitter:description" content="chatAt()1str.charAt(n) 返回字符串的第 n 个字符，如果不在 0~str.length-1之间，则返回一个空字符串。 123var str = &quot;javascript&quot;;str.charAt(2); //&apos;v&apos;str.charAt(12); //&apos;&apos;">
+    
+
+    
+        <link rel="alternate" href="/" title="本人博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">本人博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">档案</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/1.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">档案</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/1.jpg" />
+            <h2 id="name">shine-wl</h2>
+            <h3 id="title">初出茅庐</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>天津, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/Shine-wl">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                15
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://shine-wl.github.io/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-JS字符串常用方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            JS字符串的常用方法
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/18/JS字符串常用方法/">
+            <time datetime="2016-12-18T06:27:19.000Z" itemprop="datePublished">2016-12-18</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>, <a class="tag-link" href="/tags/string/">string</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="chatAt"><a href="#chatAt" class="headerlink" title="chatAt()"></a>chatAt()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.charAt(n)</div></pre></td></tr></table></figure>
+<p>返回字符串的第 n 个字符，如果不在 0~str.length-1之间，则返回一个空字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"javascript"</span>;</div><div class="line">str.charAt(<span class="number">2</span>); <span class="comment">//'v'</span></div><div class="line">str.charAt(<span class="number">12</span>); <span class="comment">//''</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="charCodeAt"><a href="#charCodeAt" class="headerlink" title="charCodeAt()"></a>charCodeAt()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.charCodeAt()</div></pre></td></tr></table></figure>
+<p>charCodeAt()返回的是给定位置字符的字符编码。它可以返回指定位置字符的 Unicode 编码，这个返回值的范围是0 - 65535 之间的整数。通过这个方法，我可以知道我的名字在计算机中是用什么数字存储的。它的取值范围跟上面的charAt( )一样。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> code = <span class="string">"future"</span>;</div><div class="line"><span class="built_in">console</span>.log(code.charAt(<span class="number">2</span>)); <span class="comment">//t</span></div><div class="line"><span class="built_in">console</span>.log(code.charCodeAt(<span class="number">2</span>)) <span class="comment">//116</span></div></pre></td></tr></table></figure>
+<h1 id="fromCharCode"><a href="#fromCharCode" class="headerlink" title="fromCharCode( )"></a>fromCharCode( )</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.fromCharCode( )</div></pre></td></tr></table></figure>
+<p>静态方法String.fromCharCode( )。跟上面的正好是相反的操作，知道Unicode编码来得到相应的字符。它可以接收一个或者多个参数。这里列出一些常见字符的编码范围，</p>
+<p>0-9对应编码是48-57</p>
+<p>A-Z对应编码是65-90</p>
+<p>a-z对应编码是97-122</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">49</span>) <span class="comment">// 1</span></div><div class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">65</span>) <span class="comment">// A</span></div><div class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">97</span>) <span class="comment">// a</span></div></pre></td></tr></table></figure>
+<h1 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf()"></a>indexOf()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.indexOf(substr[,start])</div></pre></td></tr></table></figure>
+<p>返回 substr 在字符串 str 中首次出现的位置索引,从 start 位置开始查找，如果不存在，则返回 -1。 </p>
+<p>start可以是任意整数，默认值为 0。如果 start &lt; 0 则查找整个字符串（如同传进了 0）。如果 start &gt;= str.length，则该方法返回 -1，除非被查找的字符串是一个空字符串，此时返回 str.length.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"javascript"</span>;</div><div class="line">str.indexOf(<span class="string">'s'</span>); <span class="comment">// 1</span></div><div class="line">str.indexOf(<span class="string">'s'</span>,<span class="number">6</span>); <span class="comment">// -1</span></div><div class="line">str.indexOf(<span class="string">''</span>,<span class="number">11</span>); <span class="comment">// 10</span></div><div class="line">str.indexOf(<span class="string">''</span>,<span class="number">8</span>); <span class="comment">// 8</span></div></pre></td></tr></table></figure>
+<h1 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title="lastIndexOf()"></a>lastIndexOf()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.lastIndexOf(substr[,start])</div></pre></td></tr></table></figure>
+<p>返回 substr 在字符串 str 中最后出现的位置索引,从 start 位置 向前开始查找，如果不存在，则返回 -1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">'lastindex'</span>.lastIndexOf(<span class="string">'a'</span>,<span class="number">5</span>); <span class="comment">// 1</span></div><div class="line"><span class="string">'lastindex'</span>.lastIndexOf(<span class="string">'a'</span>,<span class="number">0</span>); <span class="comment">// -1</span></div></pre></td></tr></table></figure>
+<h1 id="substring"><a href="#substring" class="headerlink" title="substring()"></a>substring()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.substring(start[, end])</div></pre></td></tr></table></figure>
+<p>返回从 start 到 end（不包括）之间的字符，start、end均为 非负整数。若结束参数(end)省略，则表示从start位置一直截取到最后。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'abcdefg'</span>;</div><div class="line">str.substring(<span class="number">1</span>, <span class="number">4</span>); <span class="comment">//"bcd"</span></div><div class="line">str.substring(<span class="number">1</span>); <span class="comment">// "bcdefg"</span></div><div class="line">str.substring(<span class="number">-1</span>); <span class="comment">//"abcdefg" 传入负值时会视为0</span></div></pre></td></tr></table></figure>
+<h1 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.slice(start[,end])</div></pre></td></tr></table></figure>
+<p>返回从 start 到 end （不包括）之间的字符，可传负值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'this is awesome'</span>;</div><div class="line">str.slice(<span class="number">4</span>, <span class="number">-1</span>); <span class="comment">//" is awesom"</span></div></pre></td></tr></table></figure>
+<h1 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.slice(start[,end])</div></pre></td></tr></table></figure>
+<p>返回 str 中从指定位置开始到指定长度的子字符串，start可为负值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"Just give me a reason"</span>;</div><div class="line">str.substr(<span class="number">5</span>, <span class="number">10</span>); <span class="comment">// "give me a "</span></div><div class="line">str.substr(<span class="number">-4</span>, <span class="number">2</span>); <span class="comment">// "as"</span></div></pre></td></tr></table></figure>
+<h1 id="substring-slice-substr-三者的区别"><a href="#substring-slice-substr-三者的区别" class="headerlink" title="substring() slice() substr()三者的区别"></a>substring() slice() substr()三者的区别</h1><p>基于子字符串创建新字符串：slice()、substr()和substring().这三个方法都返回操纵字符串的一个子字符串，而且都接收一到两个参数。<br>第一个参数指定字符串的开始位置，第二个参数（可省略）表示子字符串到哪里结束。slice()和substring()的第二个参数指定的是子字符串最后一个字符后面的位置，而substr()的第二个参数指定的是返回的字符个数。如果省略第二个参数，则截取到字符串最后一个位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"We are family"</span>; <span class="comment">//length为11</span></div><div class="line"><span class="built_in">console</span>.log(str.slice(<span class="number">2</span>,<span class="number">5</span>));    <span class="comment">// ar(从第2个位置开始，不包含第5个位置)</span></div><div class="line"><span class="built_in">console</span>.log(str.slice(<span class="number">1</span>));      <span class="comment">//e are family（从第1个位置开始，一直到最后）</span></div><div class="line"><span class="built_in">console</span>.log(str.substring(<span class="number">3</span>));  <span class="comment">//are family（从第3个位置开始，一直到最后）</span></div><div class="line"><span class="built_in">console</span>.log(str.substring(<span class="number">3</span>,<span class="number">5</span>));<span class="comment">//ar（从第3个位置开始，不包含第5个位置）</span></div><div class="line"><span class="built_in">console</span>.log(str.substr(<span class="number">2</span>));     <span class="comment">// are family（从第2个位置开始，一直到最后）</span></div><div class="line"><span class="built_in">console</span>.log(str.substr(<span class="number">2</span>,<span class="number">6</span>));   <span class="comment">// are f(从第2个位置开始，截取6个字符)</span></div></pre></td></tr></table></figure>
+<p>slice()和substring()方法在正值情况下，实现的功能一致，但是在传递的值为负值时，行为就不相同了。<br>slice()方法会将传入的负值与字符串的长度相加（因此，如果两个参数都会负值，第二个参数必须要大于第一个参数，否则返回的是空字符串）<br>substr()方法会将负的第一个参数加上字符串的长度，将将第二个参数转换为0。（如果第二个参数为负值，返回空的字符串）<br>substring()方法将所有的负值参数都转换为0，substring始终会将较小的参数作为开始位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"Wearefamily"</span>; <span class="comment">//length为11</span></div><div class="line"><span class="built_in">console</span>.log(str.slice(<span class="number">-3</span>,<span class="number">-8</span>));<span class="comment">//相当于str.slice(8,3)//返回空字符串</span></div><div class="line"><span class="built_in">console</span>.log(str.slice(<span class="number">-5</span>,<span class="number">-1</span>));<span class="comment">//相当于str.slice(6,10)//返回ami</span></div><div class="line"><span class="built_in">console</span>.log(str.substring(<span class="number">3</span>,<span class="number">-4</span>));<span class="comment">//相当于str.substring(3,0)//返回Wea</span></div><div class="line"><span class="built_in">console</span>.log(str.substring(<span class="number">-3</span>,<span class="number">-5</span>));<span class="comment">//相当于str.substring(0,0)//返回空字符串</span></div><div class="line"><span class="built_in">console</span>.log(str.substr(<span class="number">-4</span>,<span class="number">3</span>));<span class="comment">//相当于substr(7,3)//返回mil</span></div><div class="line"><span class="built_in">console</span>.log(str.substr(<span class="number">-4</span>,<span class="number">-3</span>));<span class="comment">//相当于substr(7,0)//返回空字符串</span></div></pre></td></tr></table></figure>
+<h1 id="replace"><a href="#replace" class="headerlink" title="replace()"></a>replace()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.replace(regexp|substr, newSubStr|<span class="function"><span class="keyword">function</span>)</span></div></pre></td></tr></table></figure>
+<p>替换 str 的子字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"do you love me"</span>;</div><div class="line">str.replace(<span class="string">'love'</span>,<span class="string">'hate'</span>); <span class="comment">// "do you hate me"</span></div></pre></td></tr></table></figure>
+<h1 id="search"><a href="#search" class="headerlink" title="search()"></a>search()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.search(regexp)</div></pre></td></tr></table></figure>
+<p>查找 str 与一个正则表达式是否匹配。如果匹配成功，则返回正则表达式在字符串中首次匹配项的索引；否则，返回 -1。如果参数传入的是一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'I love JavaScript!'</span>;</div><div class="line">str.search(<span class="regexp">/java/</span>); <span class="comment">// -1</span></div><div class="line">str.search(<span class="regexp">/Java/</span>); <span class="comment">// 7</span></div><div class="line">str.search(<span class="regexp">/java/i</span>); <span class="comment">// 7</span></div><div class="line">str.search(<span class="string">'Java'</span>); <span class="comment">// 7</span></div></pre></td></tr></table></figure>
+<h1 id="match"><a href="#match" class="headerlink" title="match()"></a>match()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.match(regexp)</div></pre></td></tr></table></figure>
+<p>返回一个包含匹配结果的数组，如果没有匹配项，则返回 null。如果参数传入的是一个非正则表达式对象，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'Javascript java'</span>;</div><div class="line">str.match(<span class="regexp">/Java/</span>); <span class="comment">// ["Java"]</span></div><div class="line"><span class="comment">//全局匹配+忽略大小写</span></div><div class="line">str.match(<span class="regexp">/Java/gi</span>); <span class="comment">// ["java", "Java"]</span></div><div class="line">str.match(<span class="regexp">/ab/g</span>); <span class="comment">// null</span></div></pre></td></tr></table></figure>
+<h1 id="spilt"><a href="#spilt" class="headerlink" title="spilt()"></a>spilt()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.split([separator][, limit])</div></pre></td></tr></table></figure>
+<p>返回一个数组，分隔符 separator 可以是一个字符串或正则表达式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"Hello?World!"</span>;</div><div class="line"><span class="comment">//第一个参数：指定分隔的地方</span></div><div class="line">str.split(); <span class="comment">// ["Hello?World!"]</span></div><div class="line">str.split(<span class="string">''</span>); <span class="comment">// ["H", "e", "l", "l", "o", "?", "W", "o", "r", "l", "d", "!"]</span></div><div class="line">str.split(<span class="string">'?'</span>); <span class="comment">// ["Hello", "World!"]</span></div><div class="line"><span class="comment">//第二个参数：返回指定数组的长度</span></div><div class="line">str.split(<span class="string">''</span>,<span class="number">5</span>); <span class="comment">// ["H", "e", "l", "l", "o"]</span></div></pre></td></tr></table></figure>
+<h1 id="trim"><a href="#trim" class="headerlink" title="trim()"></a>trim()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.trim()</div></pre></td></tr></table></figure>
+<p>去除 str 开头和结尾处的空白字符，返回 str 的一个副本，不影响字符串本身的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">' abc '</span>;</div><div class="line">str.trim(); <span class="comment">// 'abc'</span></div><div class="line"><span class="built_in">console</span>.log(str); <span class="comment">// ' abc '</span></div></pre></td></tr></table></figure>
+<h1 id="toLowerCase"><a href="#toLowerCase" class="headerlink" title="toLowerCase()"></a>toLowerCase()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.toLowerCase()</div></pre></td></tr></table></figure>
+<p>将 str 转换为小写，并返回 str 的一个副本，不影响字符串本身的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'JavaScript'</span>;</div><div class="line">str.toLowerCase(); <span class="comment">// 'javascript'</span></div><div class="line"><span class="built_in">console</span>.log(str); <span class="comment">// 'JavaScript'</span></div></pre></td></tr></table></figure>
+<h1 id="toUpperCase"><a href="#toUpperCase" class="headerlink" title="toUpperCase()"></a>toUpperCase()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str.toUpperCase()</div></pre></td></tr></table></figure>
+<p>将 str 转换为大写，并返回 str 的一个副本，不影响字符串本身的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'JavaScript'</span>;</div><div class="line">str.toUpperCase(); <span class="comment">// 'JAVASCRIPT'</span></div><div class="line"><span class="built_in">console</span>.log(str); <span class="comment">// 'JavaScript'</span></div></pre></td></tr></table></figure>
+<h1 id="concact"><a href="#concact" class="headerlink" title="concact()"></a>concact()</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">"my "</span>;</div><div class="line"><span class="built_in">console</span>.log(a.concat(<span class="string">"future"</span>));<span class="comment">//my future</span></div><div class="line"><span class="built_in">console</span>.log(a.concat(<span class="string">"future "</span>, <span class="string">"will"</span>));<span class="comment">//my future will</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2016/12/18/JS字符串常用方法/" data-id="cj8sbgny9000c6gqov5gilskl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2016/12/18/JS字符串常用方法/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/12/18/JS字符串常用方法/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/12/22/JS数组常用方法/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    JS中数组的常用方法
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2016/12/10/递归/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">递归</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/10/15/豆瓣电影/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/10/15/豆瓣电影/" class="title">豆瓣电影</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T05:32:17.831Z" itemprop="datePublished">2017-10-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/Git使用/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/Git使用/" class="title">git 基本使用</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.916Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/cookie和sesson/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/cookie和sesson/" class="title">cookie和session</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.915Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/require.js的使用方法和sea.js/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/require.js的使用方法和sea.js/" class="title">Javascript模块化编程require.js的用法和sea.js</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.913Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/07/选择器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/07/选择器/" class="title">CSS选择器</a></p>
+                            <p class="item-date"><time datetime="2017-09-07T12:53:31.550Z" itemprop="datePublished">2017-09-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/">function</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require，sea/">require，sea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/bind/" style="font-size: 10px;">bind</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/function/" style="font-size: 10px;">function</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/require，sea/" style="font-size: 10px;">require，sea</a> <a href="/tags/string/" style="font-size: 10px;">string</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/递归/" style="font-size: 15px;">递归</a> <a href="/tags/闭包/" style="font-size: 15px;">闭包</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 John Doe<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2016/12/18/JS字符串常用方法/';
+        
+        this.page.identifier = 'JS字符串常用方法';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

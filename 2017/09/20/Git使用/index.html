@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>git 基本使用 | 本人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="操作计算机的两种方式 图形界面–将命令转换为图形 命令行 –命令窗口命令的通用规则   命令 [选项] [参数]–后面两个可选 ls -al —-命令-选项 ls -a ./abc –命令-选项-参数DOS 和 shell 的区别   工作环境 dos(window) shell(linus)–分类：csh ksh bashshell bash 常用命令">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 基本使用">
+<meta property="og:url" content="http://yoursite.com/2017/09/20/Git使用/index.html">
+<meta property="og:site_name" content="本人博客">
+<meta property="og:description" content="操作计算机的两种方式 图形界面–将命令转换为图形 命令行 –命令窗口命令的通用规则   命令 [选项] [参数]–后面两个可选 ls -al —-命令-选项 ls -a ./abc –命令-选项-参数DOS 和 shell 的区别   工作环境 dos(window) shell(linus)–分类：csh ksh bashshell bash 常用命令">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/git1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/reset.png">
+<meta property="og:updated_time" content="2017-09-20T07:10:41.976Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git 基本使用">
+<meta name="twitter:description" content="操作计算机的两种方式 图形界面–将命令转换为图形 命令行 –命令窗口命令的通用规则   命令 [选项] [参数]–后面两个可选 ls -al —-命令-选项 ls -a ./abc –命令-选项-参数DOS 和 shell 的区别   工作环境 dos(window) shell(linus)–分类：csh ksh bashshell bash 常用命令">
+<meta name="twitter:image" content="http://yoursite.com/img/git1.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="本人博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">本人博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">档案</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/1.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">档案</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/1.jpg" />
+            <h2 id="name">shine-wl</h2>
+            <h3 id="title">初出茅庐</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>天津, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/Shine-wl">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                15
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://shine-wl.github.io/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Git使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            git 基本使用
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/09/20/Git使用/">
+            <time datetime="2017-09-20T07:01:09.916Z" itemprop="datePublished">2017-09-20</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/git/">git</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="操作计算机的两种方式"><a href="#操作计算机的两种方式" class="headerlink" title="操作计算机的两种方式"></a>操作计算机的两种方式</h2><ol>
+<li>图形界面–将命令转换为图形</li>
+<li>命令行 –命令窗口<h2 id="命令的通用规则"><a href="#命令的通用规则" class="headerlink" title="命令的通用规则"></a>命令的通用规则</h2></li>
+</ol>
+<ul>
+<li>命令 [选项] [参数]–后面两个可选<ul>
+<li>ls -al —-命令-选项</li>
+<li>ls -a ./abc –命令-选项-参数<h2 id="DOS-和-shell-的区别"><a href="#DOS-和-shell-的区别" class="headerlink" title="DOS 和 shell 的区别"></a><code>DOS</code> 和 <code>shell</code> 的区别</h2></li>
+</ul>
+</li>
+<li>工作环境<ul>
+<li>dos(window)</li>
+<li>shell(linus)–分类：csh ksh bash<h2 id="shell-bash-常用命令"><a href="#shell-bash-常用命令" class="headerlink" title="shell bash 常用命令"></a>shell bash 常用命令</h2></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><code>pwd(print Working Directory)</code>查看当前目录</li>
+<li><code>cd(change Directory)</code>切换目录，如cd/hello</li>
+<li><code>ls(List)</code>查看当前目录下的内容</li>
+</ul>
+<ol>
+<li><p><code>ls</code> 查看的是当前目录下的文件，或文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1.html  css/  hii.txt  img/  js/</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>ls -a</code> 查看的还包括./和../</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./  ../  .git/  1.html</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>ls -a -l</code>可以简写<code>ls -al</code>查看的是详细内容，包括文件类型创建日期等等…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">drwxr-xr-x 1 Administrator 197121    0 九月 13 09:46 ./</div><div class="line">drwxr-xr-x 1 Administrator 197121    0 九月 13 09:21 ../</div><div class="line">drwxr-xr-x 1 Administrator 197121    0 九月 13 09:31 .git/</div><div class="line">-rw-r--r-- 1 Administrator 197121 1444 九月 13 09:37 1.html</div><div class="line">drwxr-xr-x 1 Administrator 197121    0 九月 13 09:22 css/</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><code>mkdir(Make Directory)</code>创建目录，如mkdir hello</li>
+<li><code>touch</code>创建文件,如touch index.html</li>
+<li><code>cat</code>查看文件全部内容，如cat index.html</li>
+<li><code>less</code>查看文件，如less index.html</li>
+<li><code>rm(remove)</code>删除文件，如rm index.html</li>
+<li><code>rm hello -rf</code>删除文件夹，但是要谨慎使用，删除后不进回收站，不容易找回</li>
+<li><code>rmdir(Remove Directory)</code>删除文件，但是只能删除空文件</li>
+<li><code>mv(move)</code>移动文件或重命名，如mv index.html ./demo/index.html</li>
+<li><code>cp(copy)</code>复制文件，cp index.html ./demo/index.html</li>
+<li><code>tab</code>自动补全，连续按两次，会将匹配到的内容显示出来</li>
+<li><blockquote>
+<p>和&gt;&gt;重定向，如echo hello world &gt;index.txt,&gt;覆盖 &gt;&gt;追加</p>
+</blockquote>
+</li>
+<li><code>|</code>管道符可以将多个命令连接使用，上一个命令的执行结果当做下一个命令的参数</li>
+<li><code>grep</code>匹配内容，一般结合管道符使用<h2 id="vi编辑器"><a href="#vi编辑器" class="headerlink" title="vi编辑器"></a>vi编辑器</h2><blockquote>
+<p>linux操作系统标配，相当于windows下的记事本</p>
+<h3 id="vi编辑器的三种模式"><a href="#vi编辑器的三种模式" class="headerlink" title="vi编辑器的三种模式"></a>vi编辑器的三种模式</h3><p>vi编辑器提供了3种模式，分别是命令模式、插入模式、底行模式，每种模式下用户所能进行的操作是不一样的。</p>
+</blockquote>
+</li>
+<li>三种模式切换如下图所示<br>  <img src="/img/git1.jpg" alt="image"><h3 id="vi常用操作"><a href="#vi常用操作" class="headerlink" title="vi常用操作"></a>vi常用操作</h3><blockquote>
+<p>底行模式</p>
+</blockquote>
+</li>
+<li>打开/创建文件，vi文件路径</li>
+<li>底行模式<code>:w</code>保存,<code>:w 文件名</code>另存为</li>
+<li>底行模式<code>:wq</code>保存并退出</li>
+<li>底行模式<code>:e!</code> 撤销更改，返回到上一次保存的状态</li>
+<li>底行模式<code>:q!</code> 不保存强制退出</li>
+<li>底行模式<code>:set nu</code> 设置行号<blockquote>
+<p>命令模式</p>
+</blockquote>
+</li>
+<li>命令模式<code>u</code>辙销操作，可多次使用</li>
+<li>命令模式<code>dd</code>删除当前行</li>
+<li>命令模式<code>yy</code>复制当前行</li>
+<li>命令模式<code>p</code>粘贴内容</li>
+<li>命令模式<code>ctrl+f</code>向前翻页</li>
+<li>命令模式<code>ctrl+b</code>向后翻页</li>
+<li>命令模式<code>i</code>进入编辑模式，当前光标处插入</li>
+<li>命令模式<code>I</code>进入编辑模式，光标移动到行首</li>
+<li>命令模式<code>a</code>进入编辑模式，当前光标后插入</li>
+<li>命令模式<code>A</code>进入编辑模式，光标移动到行尾</li>
+<li>命令模式<code>o</code>进入编辑模式，当前行下面插入新行</li>
+<li>命令模式<code>O</code>进入编辑模式，当前行上面插入新行<h3 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h3></li>
+<li>本地版本控制</li>
+<li>集中版本控制</li>
+<li>分布式版本控制<h4 id="版本控制工具的作用："><a href="#版本控制工具的作用：" class="headerlink" title="版本控制工具的作用："></a>版本控制工具的作用：</h4></li>
+</ul>
+<ol>
+<li>方便团队开发过程中进行代码合并</li>
+<li>能够保留所有的历史记录，方便随时回滚<h2 id="git使用"><a href="#git使用" class="headerlink" title="git使用"></a>git使用</h2></li>
+</ol>
+<ul>
+<li>api application programming interface 应用程序编程接口</li>
+<li>UI user interface</li>
+<li>UE user expierence<h3 id="git的相关概述"><a href="#git的相关概述" class="headerlink" title="git的相关概述"></a>git的相关概述</h3></li>
+</ul>
+<ol>
+<li>文件的状态<ol>
+<li>未跟踪 (位于工作目录，新创建的文件)</li>
+<li>以暂存 (位于暂存区的文件，一般用于存储半成品)</li>
+<li>已提交 (位于本地仓库的文件，一般用于存储成品，该成品最终会上线)</li>
+<li>已修改 (位于工作目录，暂存过的文件又被修改了) </li>
+</ol>
+</li>
+<li>git相关的3个工作区域<ol>
+<li>工作目录（.git所在的目录，用来存储当前代码）</li>
+<li>暂存区（git临时存储代码，.git文件夹里）</li>
+<li>本地仓库（存储整个项目的快照，保存当前的暂存区中的一份代码，.git文件夹里）<h3 id="git管理代码步骤："><a href="#git管理代码步骤：" class="headerlink" title="git管理代码步骤："></a>git管理代码步骤：</h3><h4 id="新项目（创建）"><a href="#新项目（创建）" class="headerlink" title="新项目（创建）"></a>新项目（创建）</h4></li>
+</ol>
+</li>
+<li><p>初始化用户信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name 名字</div><div class="line">git config --global user.email 邮箱</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看用户信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --list</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化本地仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前仓库的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure>
+</li>
+<li><p>把工作目录中的文件添加到暂存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add 文件列表</div><div class="line">git add * 添加所有文件</div></pre></td></tr></table></figure>
+</li>
+<li><p>把暂存区的文件添加到本地仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git commit -m &quot;备注信息&quot;</div><div class="line">git commit -a -m &apos;备注信息&apos; -对add过得文件，修改后再提交可以直接使用这个命令进行提交，而不用在add后再提交了</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="已有项目操作（回滚）"><a href="#已有项目操作（回滚）" class="headerlink" title="已有项目操作（回滚）"></a>已有项目操作（回滚）</h4><blockquote>
+<p>快照：相当于提交的一般版本的副本，记录版本信息，方便回滚</p>
+<ul>
+<li>查看所有提交的快照 (历史)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>回滚操作</p>
+</blockquote>
+<p>图例：<br><img src="/img/reset.png" alt="image"></p>
+<ul>
+<li>git reset<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hard  回滚本地仓库的快照；使用本地仓库的快照覆盖暂存区；使用本地仓库的快照覆盖工作目录</div><div class="line">soft  只回滚本地仓库的快照</div><div class="line">mixed(默认) 回滚本地仓库的快照并且覆盖暂存区，但是不覆盖工作目录</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>HEAD 表示本地仓库的最新快照</p>
+<p>HEAD^表示上一次快照</p>
+</blockquote>
+<ul>
+<li><p>回滚最后一次提交（取消最后一次提交）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. git reset --hard HEAD^</div><div class="line">2. git reset --hard 倒数第二个commitID</div></pre></td></tr></table></figure>
+</li>
+<li><p>git add 的逆操作（回滚到最后一次修改但是未添加的状态）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. git reset --mixed HEAD</div><div class="line">2. git reset HEAD</div><div class="line">3. git reset 最后一次commitID</div><div class="line">4. git rm --cached 文件列表 --删除暂存区里的内容，删除之后文件是未跟踪状态,add之后删除，暂存区里的文件</div></pre></td></tr></table></figure>
+</li>
+<li><p>回滚所有修改操作（用暂存区的文件覆盖工作目录的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. git checkout 文件列表</div><div class="line">2. git checkout .   --回滚所有的</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><ul>
+<li><p>查看分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch 分支名称</div></pre></td></tr></table></figure>
+</li>
+<li><p>切换分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout 分支名称</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建并切换分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b 分支名称</div></pre></td></tr></table></figure>
+</li>
+<li><p>合并分支 接受合并分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge 分支名称（来源分支）</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git branch -d 分支名称（分支必须被合并过之后才能删除，否则删不掉）</div><div class="line">git branch -D 分支名称（强制删除分支）</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除远程分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git push origin --delete 分支名称</div><div class="line">git push origin :分支名称</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><ul>
+<li><p>创建远程仓库本地的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. 创建以.git结尾的目录mkdir repo.git</div><div class="line">2. 进入该目录cd repo.git</div><div class="line">3. 初始化共享仓库git init --bare</div></pre></td></tr></table></figure>
+</li>
+<li><p>第一次获取代码一般使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 远程仓库的地址 项目名称（可选的）</div></pre></td></tr></table></figure>
+</li>
+<li><p>克隆远程仓库有分支的情况</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//第一步clone</div><div class="line"> git clone 远程仓库的地址 项目名称（可选的）</div><div class="line">//第二步 创建分支并转到分支 以teacher分支为例</div><div class="line">git checkout -b teacher</div><div class="line">//第三部 合并分支</div><div class="line">git merge origin/teacher</div></pre></td></tr></table></figure>
+<p>远程仓库操作**</p>
+<ul>
+<li><p>上传代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git push 远程仓库的地址 本地分支名称:远程分支的名称</div><div class="line">git push 远程仓库的地址 本地分支名称</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git pull 远程仓库的地址 远程分支的名称:本地分支的名称</div><div class="line">git pull 远程仓库的地址 远程分支的名称</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看远程仓库别名</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote -v （查看详细信息）</div><div class="line">git remote</div></pre></td></tr></table></figure>
+<ul>
+<li>创建别名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add 别名名称</div></pre></td></tr></table></figure>
+<ul>
+<li>重命名别名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote rename 原来名称 新名称</div></pre></td></tr></table></figure>
+<ul>
+<li>删除别名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote remove 别名名称</div></pre></td></tr></table></figure>
+<ul>
+<li>.gitignore文件的作用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">作用：就是排除一些文件或者目录，使其不被git管理</div><div class="line">用法: 1.将要隐藏的文件名字写到.gitignore中</div><div class="line">	 2.添加.gitignore文件暂存区</div><div class="line">	 3.提交.gitignore文件</div></pre></td></tr></table></figure>
+<ul>
+<li><code>git stash</code>保存现场</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git stash 保存之前写的没有add过得文件或代码</div><div class="line">git stash pop	恢复之前保存的文件或代码</div><div class="line">CONFLICT (content):这个表示冲突，因为是自己写的代码所以可以自己决定保留什么代码</div></pre></td></tr></table></figure>
+<ul>
+<li><p><code>git difftool</code>比较差异</p>
+<p>将修改的内容和暂存区进行比较</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git difftool  ---显示结果输入：y ,然后出现一个框，左侧是暂存区，右侧是工作目录</div><div class="line">git difftool &apos;快照&apos; ---对比与特定快照的差异，有几个不一样的他都会比较几个，一个一个的进行比较 </div><div class="line">git difftool &apos;快照&apos; &apos;快照&apos;  ---比较两个快照之间的差异</div><div class="line">git difftool &apos;分支名称&apos;  ---比较与某个分支之间的差异</div></pre></td></tr></table></figure>
+<ul>
+<li><code>CONFLICT (content)</code>出现冲突</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">出现冲突的原因：本地仓库中的文件在工作目录的文件不存在，下载的时候就会出现冲突</div><div class="line">解决方法需要跟写这个代码的人，进行协商解决,决定删除冲突的代码或者全部保留</div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2017/09/20/Git使用/" data-id="cj8sbgnwu00006gqo4g16hegv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2017/09/20/Git使用/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2017/09/20/Git使用/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/10/15/豆瓣电影/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    豆瓣电影
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/09/20/cookie和sesson/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">cookie和session</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/10/15/豆瓣电影/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/10/15/豆瓣电影/" class="title">豆瓣电影</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T05:32:17.831Z" itemprop="datePublished">2017-10-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/Git使用/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/Git使用/" class="title">git 基本使用</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.916Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/cookie和sesson/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/cookie和sesson/" class="title">cookie和session</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.915Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/20/require.js的使用方法和sea.js/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/20/require.js的使用方法和sea.js/" class="title">Javascript模块化编程require.js的用法和sea.js</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:01:09.913Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/09/07/选择器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/09/07/选择器/" class="title">CSS选择器</a></p>
+                            <p class="item-date"><time datetime="2017-09-07T12:53:31.550Z" itemprop="datePublished">2017-09-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apply/">apply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/function/">function</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prototype/">prototype</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require，sea/">require，sea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/apply/" style="font-size: 10px;">apply</a> <a href="/tags/bind/" style="font-size: 10px;">bind</a> <a href="/tags/call/" style="font-size: 10px;">call</a> <a href="/tags/function/" style="font-size: 10px;">function</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/require，sea/" style="font-size: 10px;">require，sea</a> <a href="/tags/string/" style="font-size: 10px;">string</a> <a href="/tags/this/" style="font-size: 10px;">this</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/递归/" style="font-size: 15px;">递归</a> <a href="/tags/闭包/" style="font-size: 15px;">闭包</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 John Doe<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2017/09/20/Git使用/';
+        
+        this.page.identifier = 'Git使用';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
